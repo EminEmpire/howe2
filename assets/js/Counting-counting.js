@@ -14,14 +14,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 var target = parseInt(loveCount.textContent);
                 var counter = { value: 0 };
                 var duration = 2000;
-                var stepTime = Math.abs(Math.floor(duration / target));
+                var increment = target === 6000 ? 100 : 1;
+                var stepTime = Math.abs(Math.floor(duration / (target / increment)));
 
                 function updateCounter() {
-                    counter.value += 1;
+                    counter.value += increment;
                     loveCount.textContent = counter.value + '+';
 
                     if (counter.value < target) {
                         setTimeout(updateCounter, stepTime);
+                    } else {
+                        loveCount.textContent = target + '+'; // Ensure it stops exactly at target
                     }
                 }
 
